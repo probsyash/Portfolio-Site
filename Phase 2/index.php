@@ -18,11 +18,11 @@
     <header>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="education.html">Education</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="addEntry.html">Blog</a></li>
-                <li><a href="skills.html">Skills</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="education.php">Education</a></li>
+                <li><a href="portfolio.php">Portfolio</a></li>
+                <li><a href="addEntry.php">Blog</a></li>
+                <li><a href="skills.php">Skills</a></li>
             </ul>
         </nav>
 

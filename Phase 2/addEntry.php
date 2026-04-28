@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Add Entry | My Portfolio</title>
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -18,11 +18,11 @@
     <header>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="education.html">Education</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="addEntry.html">Blog</a></li>
-                <li><a href="skills.html">Skills</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="education.php">Education</a></li>
+                <li><a href="portfolio.php">Portfolio</a></li>
+                <li><a href="addEntry.php">Blog</a></li>
+                <li><a href="skills.php">Skills</a></li>
             </ul>
         </nav>
 
@@ -58,41 +58,53 @@
         <video loop autoplay muted playsinline src="videos/galaxy.mp4" type="video/mp4"></video>
     </div>
 
-    <!-- Profile Section -->
     <article>
 
+        <!-- Page Title Section -->
         <section class="profileHeader">
-            <div class="avatarCircle">
-                <img src="images/profile.png" alt="Avatar" class="avatarImage">
-            </div>
             <div class="profileInfo">
-                <h1 class="name">Yashaskar Karmacharya</h1>
-                <p class="welcome">Welcome to my portfolio!</p>
+                <h1 class="name">Add Blog Entry</h1>
+                <p class="welcome">Share your thoughts</p>
             </div>
         </section>
 
+        <!-- Add Entry Section -->
         <section class="cardsContainer">
+
             <div class="card aboutMeCard">
                 <div class="cardIconWrap">
-                    <span class="cardIcon">👤</span>
+                    <span class="cardIcon">✏️</span>
                 </div>
-                <span class="cardLabel">About Me</span>
+                <span class="cardLabel">New Post</span>
             </div>
 
             <div class="card mainCard">
-                <h2>CS @ QMUL</h2>
-                <p class="subtitle">Undergraduate Student | Aspiring Software Engineer | Year 1 Course Representative</p>
-                <p>• Interested in software engineering, artificial intelligence, and game design</p>
-                <p>• Enjoys building projects that combine problem-solving, creativity, and technical implementation</p>
-                <p>• Passionate about learning new technologies and applying them to real-world challenges</p>
-                <p>• Eager to contribute to impactful projects and collaborate with like-minded individuals</p>
-            </div>
+                <form class="blogForm" action="php/addPost.php" method="post">
 
-            <figure>
-                <a href="https://git.io/streak-stats"><img src="https://streak-stats.demolab.com?user=probsyash&background=000000&border=9826EB&stroke=EBEBEB&ring=9826EB&fire=9826EB&currStreakNum=EBEBEB&sideNums=EBEBEB&currStreakLabel=EBEBEB" alt="GitHub Streak" class="githubStats"/></a>
-                <br>
-                <figcaption>Github Stats</figcaption>
-            </figure>
+                    <div class="formGroup">
+                        <label for="blogTitle">Title</label>
+                        <input
+                            type="text"
+                            id="blogTitle"
+                            name="blogTitle"
+                            placeholder="Enter post title"
+                            required>
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="blogPost">Post</label>
+                        <textarea
+                            id="blogPost"
+                            name="blogPost"
+                            rows="10"
+                            placeholder="Write your blog post here..."
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="submitBtn">Post</button>
+
+                </form>
+            </div>
 
         </section>
 
