@@ -34,7 +34,7 @@
 
     <!-- Login Modal -->
     <div id="id01" class="modal">
-        <form class="modal-content animate" action="php/login.php" method="post">
+        <form class="modal-content animate" action="login.php" method="post">
             <div class="container">
                 <h2>Login</h2>
 
