@@ -761,3 +761,26 @@ footer{
 .videoCredit a:hover {
     text-decoration: underline;
 }
+
+/* ============================================
+   BLOG
+   ============================================ */
+
+.blogEntry {
+    margin: 20px 0;
+}
+
+.blogDate {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.blogTitle {
+    font-size: 1.4rem;
+    margin: 5px 0;
+}
+
+.blogContent {
+    font-size: 1rem;
+    line-height: 1.6;
+}

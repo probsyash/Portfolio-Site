@@ -1,3 +1,16 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    echo '<script>
+        alert("You must be logged in to access this page.");
+        window.location.href = "index.php";
+    </script>';
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<!-- rest of your page -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +34,7 @@
                 <li><a href="index.php">Home</a></li>
                 <li><a href="education.php">Education</a></li>
                 <li><a href="portfolio.php">Portfolio</a></li>
-                <li><a href="addEntry.php">Blog</a></li>
+                <li><a href="viewBlog.php">Blog</a></li>
                 <li><a href="skills.php">Skills</a></li>
             </ul>
         </nav>
@@ -34,7 +47,7 @@
 
     <!-- Login Modal -->
     <div id="id01" class="modal">
-        <form class="modal-content animate" action="php/login.php" method="post">
+        <form class="modal-content animate" action="loginProcess.php" method="post">
             <div class="container">
                 <h2>Login</h2>
 
@@ -79,7 +92,7 @@
             </div>
 
             <div class="card mainCard">
-                <form class="blogForm" action="php/addPost.php" method="post">
+                <form class="blogForm" action="addPost.php" method="post">
 
                     <div class="formGroup">
                         <label for="blogTitle">Title</label>

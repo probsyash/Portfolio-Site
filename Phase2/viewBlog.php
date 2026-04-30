@@ -1,9 +1,16 @@
+<?php
+session_start();
+include("connection.php");
+
+$sql = "SELECT * FROM blog_posts";
+$result = mysqli_query($conn, $sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Blog | My Portfolio</title>
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -58,41 +65,47 @@
         <video loop autoplay muted playsinline src="videos/galaxy.mp4" type="video/mp4"></video>
     </div>
 
-    <!-- Profile Section -->
     <article>
 
+        <!-- Page Title Section -->
         <section class="profileHeader">
-            <div class="avatarCircle">
-                <img src="images/profile.png" alt="Avatar" class="avatarImage">
-            </div>
             <div class="profileInfo">
-                <h1 class="name">Yashaskar Karmacharya</h1>
-                <p class="welcome">Welcome to my portfolio!</p>
+                <h1 class="name">Blog</h1>
+                <p class="welcome">My latest posts</p>
             </div>
         </section>
 
         <section class="cardsContainer">
+
             <div class="card aboutMeCard">
                 <div class="cardIconWrap">
-                    <span class="cardIcon">👤</span>
+                    <span class="cardIcon">📝</span>
                 </div>
-                <span class="cardLabel">About Me</span>
+                <span class="cardLabel">Blog</span>
             </div>
 
-            <div class="card mainCard">
-                <h2>CS @ QMUL</h2>
-                <p class="subtitle">Undergraduate Student | Aspiring Software Engineer | Year 1 Course Representative</p>
-                <p>• Interested in software engineering, artificial intelligence, and game design</p>
-                <p>• Enjoys building projects that combine problem-solving, creativity, and technical implementation</p>
-                <p>• Passionate about learning new technologies and applying them to real-world challenges</p>
-                <p>• Eager to contribute to impactful projects and collaborate with like-minded individuals</p>
-            </div>
+            <?php if (isset($_SESSION['username'])): ?>
+                <div class="card mainCard">
+                    <p>Welcome, Yashaskar!</p>
+                    <a href="addEntry.php" class="submitBtn">Add Post</a>
+                    <a href="logout.php" class="submitBtn">Logout</a>
+                </div>
+            <?php endif; ?>
 
-            <figure>
-                <a href="https://git.io/streak-stats"><img src="https://streak-stats.demolab.com?user=probsyash&background=000000&border=9826EB&stroke=EBEBEB&ring=9826EB&fire=9826EB&currStreakNum=EBEBEB&sideNums=EBEBEB&currStreakLabel=EBEBEB" alt="GitHub Streak" class="githubStats"/></a>
-                <br>
-                <figcaption>Github Stats</figcaption>
-            </figure>
+            <?php if (mysqli_num_rows($result) > 0): ?>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <div class="card mainCard blogEntry">
+                        <p class="blogDate"><?php echo $row['date_posted'] . " " . $row['time_posted']; ?></p>
+                        <h2 class="blogTitle"><?php echo $row['title']; ?></h2>
+                        <hr>
+                        <p class="blogContent"><?php echo $row['content']; ?></p>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <div class="card mainCard">
+                    <p>No blog posts yet.</p>
+                </div>
+            <?php endif; ?>
 
         </section>
 
@@ -100,7 +113,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 Yashaskar Karmacharya | All Rights Reserved</p>
+        <p>&copy; 2026 Yashaskar Karmacharya | All Rights Reserved</p>
         
         <p class="videoCredit">
             Background video by 

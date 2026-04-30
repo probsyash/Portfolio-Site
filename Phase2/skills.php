@@ -20,7 +20,7 @@
                 <li><a href="index.php">Home</a></li>
                 <li><a href="education.php">Education</a></li>
                 <li><a href="portfolio.php">Portfolio</a></li>
-                <li><a href="addEntry.php">Blog</a></li>
+                <li><a href="viewBlog.php">Blog</a></li>
                 <li><a href="skills.php">Skills</a></li>
             </ul>
         </nav>
@@ -33,7 +33,7 @@
 
     <!-- Login Modal -->
     <div id="id01" class="modal">
-        <form class="modal-content animate" action="php/login.php" method="post">
+        <form class="modal-content animate" action="loginProcess.php" method="post">
             <div class="container">
                 <h2>Login</h2>
 
