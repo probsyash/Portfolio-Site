@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,9 +27,11 @@
         </nav>
 
         <!-- Login Button -->
-        <button class="loginCircle" id="loginBtn">
-            <img src="images/login.png" alt="Login">
-        </button>
+        <?php if (!isset($_SESSION['username'])): ?>
+            <button class="loginCircle" id="loginBtn">
+                <img src="images/login.png" alt="Login">
+            </button>
+        <?php endif; ?>
     </header>
 
     <!-- Login Modal -->
@@ -36,7 +39,7 @@
         <form class="modal-content animate" action="loginProcess.php" method="post">
             <div class="container">
                 <h2>Login</h2>
-
+                <br>
                 <label for="uname"><b>Email</b></label>
                 <input type="email" placeholder="Enter Email" name="uname" id="uname" required>
 

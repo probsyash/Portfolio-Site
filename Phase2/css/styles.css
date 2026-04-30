@@ -345,6 +345,29 @@ article {
     color: #dddddd;
 }
 
+.welcomeRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.welcomeMessage {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 0.9em 1.2em;
+    background-color: rgba(40, 40, 45, 0.85);
+    width: 65%
+}
+
+.welcomeButtons {
+    display: flex;
+    gap: 10px;
+    text-decoration: none;
+}
+
+
 /* ============================================
    LOGIN MODAL
    ============================================ */
@@ -732,6 +755,7 @@ figcaption {
     cursor: pointer;
     transition: background-color 0.3s ease;
     align-self: flex-start;
+    text-decoration: none;
 }
 
 .submitBtn:hover {
@@ -765,14 +789,14 @@ footer{
 /* ============================================
    BLOG
    ============================================ */
+   
+   .blogEntry {
 
-.blogEntry {
-    margin: 20px 0;
 }
 
 .blogDate {
     font-size: 0.85rem;
-    color: #888;
+    color: #4b0000;
 }
 
 .blogTitle {

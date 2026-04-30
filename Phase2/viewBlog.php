@@ -34,9 +34,11 @@ $result = mysqli_query($conn, $sql);
         </nav>
 
         <!-- Login Button -->
-        <button class="loginCircle" id="loginBtn">
-            <img src="images/login.png" alt="Login">
-        </button>
+        <?php if (!isset($_SESSION['username'])): ?>
+            <button class="loginCircle" id="loginBtn">
+                <img src="images/login.png" alt="Login">
+            </button>
+        <?php endif; ?>
     </header>
 
     <!-- Login Modal -->
@@ -44,7 +46,7 @@ $result = mysqli_query($conn, $sql);
         <form class="modal-content animate" action="loginProcess.php" method="post">
             <div class="container">
                 <h2>Login</h2>
-
+                <br>
                 <label for="uname"><b>Email</b></label>
                 <input type="email" placeholder="Enter Email" name="uname" id="uname" required>
 
@@ -71,7 +73,6 @@ $result = mysqli_query($conn, $sql);
         <section class="profileHeader">
             <div class="profileInfo">
                 <h1 class="name">Blog</h1>
-                <p class="welcome">My latest posts</p>
             </div>
         </section>
 
@@ -85,10 +86,14 @@ $result = mysqli_query($conn, $sql);
             </div>
 
             <?php if (isset($_SESSION['username'])): ?>
-                <div class="card mainCard">
-                    <p>Welcome, Yashaskar!</p>
-                    <a href="addEntry.php" class="submitBtn">Add Post</a>
-                    <a href="logout.php" class="submitBtn">Logout</a>
+                <div class="welcomeRow">
+                    <div class="card welcomeMessage">
+                        <p>Welcome, <?php echo $_SESSION['username']; ?>!</p>
+                    </div>
+                    <div class="welcomeButtons">
+                        <a href="addEntry.php" class="submitBtn">Add Post</a>
+                        <a href="logout.php" class="submitBtn">Logout</a>
+                    </div>
                 </div>
             <?php endif; ?>
 

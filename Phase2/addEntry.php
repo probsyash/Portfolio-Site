@@ -40,9 +40,11 @@ if (!isset($_SESSION['username'])) {
         </nav>
 
         <!-- Login Button -->
-        <button class="loginCircle" id="loginBtn">
-            <img src="images/login.png" alt="Login">
-        </button>
+        <?php if (!isset($_SESSION['username'])): ?>
+            <button class="loginCircle" id="loginBtn">
+                <img src="images/login.png" alt="Login">
+            </button>
+        <?php endif; ?>
     </header>
 
     <!-- Login Modal -->
@@ -50,7 +52,7 @@ if (!isset($_SESSION['username'])) {
         <form class="modal-content animate" action="loginProcess.php" method="post">
             <div class="container">
                 <h2>Login</h2>
-
+                <br>
                 <label for="uname"><b>Email</b></label>
                 <input type="email" placeholder="Enter Email" name="uname" id="uname" required>
 
