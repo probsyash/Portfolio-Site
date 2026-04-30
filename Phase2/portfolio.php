@@ -82,7 +82,7 @@
 
             <div class="projectGrid">
 
-                <a href="file:///Users/probsyash/Downloads/ALL%20CS%20CODE%20TESTING/ECS417U%20-%20Fundamentals%20of%20Web%20Technology/Projects/Portfolio%20Site/Phase%201/index.php" target="_blank" class="projectCard">
+                <a href="index.php" class="projectCard">
                     <div class="projectImageWrap">
                         <img src="images/Portfolio.png" alt="Project One Screenshot" class="projectImage">
                     </div>

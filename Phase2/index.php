@@ -84,7 +84,7 @@
 
             <div class="card mainCard">
                 <h2>CS @ QMUL</h2>
-                <p class="subtitle">Undergraduate Student | Aspiring Software Engineer | Year 1 Course Representative</p>
+                <p class="subtitle">Aspiring Software Engineer | Year 1 Course Representative</p>
                 <p>• Interested in software engineering, artificial intelligence, and game design</p>
                 <p>• Enjoys building projects that combine problem-solving, creativity, and technical implementation</p>
                 <p>• Passionate about learning new technologies and applying them to real-world challenges</p>

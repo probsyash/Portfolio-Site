@@ -2,8 +2,70 @@
 session_start();
 include("connection.php");
 
+// Fetch all posts unsorted
 $sql = "SELECT * FROM blog_posts";
 $result = mysqli_query($conn, $sql);
+
+// Store posts in array
+$posts = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $posts[] = $row;
+}
+
+// Sorting algorithm - bubble sort descending by date and time
+$n = count($posts);
+for ($i = 0; $i < $n - 1; $i++) {
+    for ($j = 0; $j < $n - $i - 1; $j++) {
+        $dateA = $posts[$j]['date_posted'];
+        $dateB = $posts[$j + 1]['date_posted'];
+        $timeA = $posts[$j]['time_posted'];
+        $timeB = $posts[$j + 1]['time_posted'];
+
+        if ($dateA < $dateB) {
+            $temp = $posts[$j];
+            $posts[$j] = $posts[$j + 1];
+            $posts[$j + 1] = $temp;
+        }
+        elseif ($dateA == $dateB && $timeA < $timeB) {
+            $temp = $posts[$j];
+            $posts[$j] = $posts[$j + 1];
+            $posts[$j + 1] = $temp;
+        }
+    }
+}
+
+// Get unique months from posts for the dropdown
+$months = [];
+foreach ($posts as $post) {
+    $monthKey = date('Y-m', strtotime($post['date_posted']));
+    $monthLabel = date('F Y', strtotime($post['date_posted']));
+    if (!isset($months[$monthKey])) {
+        $months[$monthKey] = $monthLabel;
+    }
+}
+
+// Check if a month filter is selected
+$selectedMonth = isset($_GET['month']) ? $_GET['month'] : 'all';
+
+// Filter posts if a month is selected
+if ($selectedMonth !== 'all') {
+    $filteredPosts = [];
+    foreach ($posts as $post) {
+        $postMonth = date('Y-m', strtotime($post['date_posted']));
+        if ($postMonth === $selectedMonth) {
+            $filteredPosts[] = $post;
+        }
+    }
+} 
+else {
+    $filteredPosts = $posts;
+}
+
+// If no posts exist, redirect to login
+if (count($posts) == 0) {
+    header("Location: index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,18 +159,33 @@ $result = mysqli_query($conn, $sql);
                 </div>
             <?php endif; ?>
 
-            <?php if (mysqli_num_rows($result) > 0): ?>
-                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <!-- Month Filter -->
+            <div class="card mainCard monthFilter">
+                <form method="get" action="viewBlog.php" class="filterForm">
+                    <label for="month">Filter by month:</label>
+                    <select name="month" id="month" onchange="this.form.submit()">
+                        <option value="all" <?php echo $selectedMonth === 'all' ? 'selected' : ''; ?>>All Posts</option>
+                        <?php foreach ($months as $key => $label): ?>
+                            <option value="<?php echo $key; ?>" <?php echo $selectedMonth === $key ? 'selected' : ''; ?>>
+                                <?php echo $label; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </form>
+            </div>
+
+            <?php if (count($filteredPosts) > 0): ?>
+                <?php foreach ($filteredPosts as $post): ?>
                     <div class="card mainCard blogEntry">
-                        <p class="blogDate"><?php echo $row['date_posted'] . " " . $row['time_posted']; ?></p>
-                        <h2 class="blogTitle"><?php echo $row['title']; ?></h2>
+                        <p class="blogDate"><?php echo date('jS F Y, G:i', strtotime($post['date_posted'] . ' ' . $post['time_posted'])); ?> UTC</p>
+                        <h2 class="blogTitle"><?php echo $post['title']; ?></h2>
                         <hr>
-                        <p class="blogContent"><?php echo $row['content']; ?></p>
+                        <p class="blogContent"><?php echo $post['content']; ?></p>
                     </div>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             <?php else: ?>
                 <div class="card mainCard">
-                    <p>No blog posts yet.</p>
+                    <p>No blog posts found for this month.</p>
                 </div>
             <?php endif; ?>
 
@@ -119,10 +196,10 @@ $result = mysqli_query($conn, $sql);
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 Yashaskar Karmacharya | All Rights Reserved</p>
-        
+
         <p class="videoCredit">
-            Background video by 
-            <a href="https://www.youtube.com/watch?v=moRqo158NGc" target="_blank">MiladiCode</a> 
+            Background video by
+            <a href="https://www.youtube.com/watch?v=moRqo158NGc" target="_blank">MiladiCode</a>
             via Youtube
         </p>
 

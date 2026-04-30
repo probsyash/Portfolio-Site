@@ -8,9 +8,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<!-- rest of your page -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,35 +36,7 @@ if (!isset($_SESSION['username'])) {
                 <li><a href="skills.php">Skills</a></li>
             </ul>
         </nav>
-
-        <!-- Login Button -->
-        <?php if (!isset($_SESSION['username'])): ?>
-            <button class="loginCircle" id="loginBtn">
-                <img src="images/login.png" alt="Login">
-            </button>
-        <?php endif; ?>
     </header>
-
-    <!-- Login Modal -->
-    <div id="id01" class="modal">
-        <form class="modal-content animate" action="loginProcess.php" method="post">
-            <div class="container">
-                <h2>Login</h2>
-                <br>
-                <label for="uname"><b>Email</b></label>
-                <input type="email" placeholder="Enter Email" name="uname" id="uname" required>
-
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
-                <button type="submit" class="loginBtn">Login</button>
-
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-            </div>
-        </form>
-    </div>
 
     <!-- Background Video -->
     <div class="backgroundVideo">
@@ -94,7 +64,7 @@ if (!isset($_SESSION['username'])) {
             </div>
 
             <div class="card mainCard">
-                <form class="blogForm" action="addPost.php" method="post">
+                <form class="blogForm" action="addPost.php" method="post" id="blogForm">
 
                     <div class="formGroup">
                         <label for="blogTitle">Title</label>
@@ -103,7 +73,8 @@ if (!isset($_SESSION['username'])) {
                             id="blogTitle"
                             name="blogTitle"
                             placeholder="Enter post title"
-                            required>
+                            value="<?php echo isset($_SESSION['preview']) ? htmlspecialchars($_SESSION['preview']['title']) : ''; ?>"
+                        >
                     </div>
 
                     <div class="formGroup">
@@ -113,13 +84,37 @@ if (!isset($_SESSION['username'])) {
                             name="blogPost"
                             rows="10"
                             placeholder="Write your blog post here..."
-                            required></textarea>
+                        ><?php echo isset($_SESSION['preview']) ? htmlspecialchars($_SESSION['preview']['content']) : ''; ?></textarea>
                     </div>
 
-                    <button type="submit" class="submitBtn">Post</button>
-
+                    <div class="formButtons">
+                        <button type="submit" class="submitBtn">Post</button>
+                        <button type="button" class="submitBtn" id="clearBtn">Clear</button>
+                        <button type="submit" name="preview" value="1" class="submitBtn">Preview</button>
+                    </div>
                 </form>
             </div>
+
+            <!-- Preview Section - only shows when preview is clicked -->
+            <?php if (isset($_SESSION['preview'])): ?>
+                <div class="card mainCard blogEntry">
+                    <h2>Preview</h2>
+                    <hr>
+                    <p class="blogDate"><?php echo date('jS F Y, G:i'); ?> UTC</p>
+                    <h2 class="blogTitle"><?php echo htmlspecialchars($_SESSION['preview']['title']); ?></h2>
+                    <hr>
+                    <p class="blogContent"><?php echo htmlspecialchars($_SESSION['preview']['content']); ?></p>
+                    <hr>
+                    <div class="previewButtons">
+                        <form action="addPost.php" method="post" style="display: inline;">
+                            <input type="hidden" name="blogTitle" value="<?php echo htmlspecialchars($_SESSION['preview']['title']); ?>">
+                            <input type="hidden" name="blogPost" value="<?php echo htmlspecialchars($_SESSION['preview']['content']); ?>">
+                            <button type="submit" class="submitBtn">Upload</button>
+                        </form>
+                        <a href="addEntry.php" class="submitBtn">Edit</a>
+                    </div>
+                </div>
+            <?php endif; ?>
 
         </section>
 
@@ -127,11 +122,11 @@ if (!isset($_SESSION['username'])) {
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 Yashaskar Karmacharya | All Rights Reserved</p>
-        
+        <p>&copy; 2026 Yashaskar Karmacharya | All Rights Reserved</p>
+
         <p class="videoCredit">
-            Background video by 
-            <a href="https://www.youtube.com/watch?v=moRqo158NGc" target="_blank">MiladiCode</a> 
+            Background video by
+            <a href="https://www.youtube.com/watch?v=moRqo158NGc" target="_blank">MiladiCode</a>
             via Youtube
         </p>
 
@@ -146,7 +141,7 @@ if (!isset($_SESSION['username'])) {
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/login.js"></script>
+    <script src="js/addEntry.js"></script>
 
 </body>
 </html>

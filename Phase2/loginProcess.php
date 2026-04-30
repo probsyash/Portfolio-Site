@@ -12,7 +12,7 @@ if(isset($_POST['uname']) && isset($_POST['psw'])) {
 
     if($count == 1) {
         $_SESSION['username'] = $uname;
-        header("Location: viewBlog.php");
+        header("Location: addEntry.php");
         exit();
     } else {
         echo '<script> 

@@ -358,7 +358,7 @@ article {
     gap: 1em;
     padding: 0.9em 1.2em;
     background-color: rgba(40, 40, 45, 0.85);
-    width: 65%
+    width: 65%;
 }
 
 .welcomeButtons {
@@ -366,7 +366,6 @@ article {
     gap: 10px;
     text-decoration: none;
 }
-
 
 /* ============================================
    LOGIN MODAL
@@ -665,40 +664,6 @@ figcaption {
 }
 
 /* ============================================
-   RESPONSIVE
-   ============================================ */
-
-@media screen and (max-width: 768px) {
-    .projectGrid {
-        grid-template-columns: 1fr;
-    }
-
-    .profileHeader {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .profileInfo .name {
-        font-size: 2em;
-    }
-
-    .welcome {
-        font-size: 1.4em;
-    }
-
-    article {
-        margin: 4em auto 2em;
-        padding: 0 1em;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .modal-content {
-        width: 90%;
-    }
-}
-
-/* ============================================
    BLOG FORM
    ============================================ */
 
@@ -743,6 +708,11 @@ figcaption {
     min-height: 120px;
 }
 
+.formButtons {
+    display: flex;
+    gap: 10px;
+}
+
 .submitBtn {
     background-color: #38bdf8;
     color: #000000;
@@ -763,10 +733,76 @@ figcaption {
 }
 
 /* ============================================
+   BLOG ENTRIES
+   ============================================ */
+
+.blogEntry .blogDate {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.blogEntry .blogTitle {
+    font-size: 1.4rem;
+    color: #fff;
+    margin: 5px 0;
+}
+
+.blogEntry .blogContent {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* ============================================
+   INPUT ERROR
+   ============================================ */
+
+.inputError {
+    border: 2px solid red !important;
+    background-color: rgba(255, 0, 0, 0.1) !important;
+}
+
+/* ============================================
+   MONTH FILTER
+   ============================================ */
+
+.monthFilter {
+    min-height: auto;
+}
+
+.filterForm {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.filterForm label {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #cccccc;
+}
+
+.filterForm select {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.filterForm select:focus {
+    outline: none;
+    border-color: #38bdf8;
+}
+
+/* ============================================
    FOOTER
    ============================================ */
 
-footer{
+footer {
     text-align: center;
 }
 
@@ -787,24 +823,99 @@ footer{
 }
 
 /* ============================================
-   BLOG
+   RESPONSIVE - 768px
    ============================================ */
-   
-   .blogEntry {
 
+@media screen and (max-width: 768px) {
+    /* Profile */
+    .profileHeader {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profileInfo .name {
+        font-size: 2em;
+    }
+
+    .welcome {
+        font-size: 1.4em;
+    }
+
+    /* Article */
+    article {
+        margin: 6em auto 2em;
+        padding: 0 1em;
+    }
+
+    /* Project grid */
+    .projectGrid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Welcome row on blog page */
+    .welcomeRow {
+        flex-direction: column;
+    }
+
+    .welcomeMessage {
+        width: 100%;
+    }
+
+    .welcomeButtons {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Cards */
+    .mainCard {
+        padding: 1.2em 1em;
+        min-height: auto;
+    }
+
+    /* Form buttons */
+    .formButtons {
+        flex-direction: column;
+    }
+
+    /* Blog entries */
+    .blogEntry .blogTitle {
+        font-size: 1.1rem;
+    }
+
+    .blogEntry .blogContent {
+        font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .footerLinks {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Login circle */
+    .loginCircle {
+        top: auto;
+        bottom: 1em;
+        right: 1em;
+    }
+
+    /* Tech stack */
+    .techStack img {
+        height: 28px;
+    }
+
+    /* Timeline */
+    .timeline {
+        padding-left: 20px;
+    }
 }
 
-.blogDate {
-    font-size: 0.85rem;
-    color: #4b0000;
-}
+@media screen and (max-width: 400px) {
+    .modal-content {
+        width: 90%;
+    }
 
-.blogTitle {
-    font-size: 1.4rem;
-    margin: 5px 0;
-}
-
-.blogContent {
-    font-size: 1rem;
-    line-height: 1.6;
+    .profileInfo .name {
+        font-size: 1.5em;
+    }
 }
