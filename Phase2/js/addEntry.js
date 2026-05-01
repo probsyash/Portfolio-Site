@@ -2,6 +2,7 @@ document.getElementById('clearBtn').addEventListener('click', function() {
     if (confirm('Are you sure you want to clear all fields?')) {
         document.getElementById('blogTitle').value = '';
         document.getElementById('blogPost').value = '';
+        window.location.href = 'clearPreview.php';
     }
 });
 

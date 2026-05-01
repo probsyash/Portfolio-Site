@@ -7,6 +7,37 @@ if (!isset($_SESSION['username'])) {
     </script>';
     exit();
 }
+include("connection.php");
+
+// Fetch existing posts for preview
+$sql = "SELECT * FROM blog_posts";
+$result = mysqli_query($conn, $sql);
+$posts = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $posts[] = $row;
+}
+
+// Sort posts - bubble sort descending
+$n = count($posts);
+for ($i = 0; $i < $n - 1; $i++) {
+    for ($j = 0; $j < $n - $i - 1; $j++) {
+        $dateA = $posts[$j]['date_posted'];
+        $dateB = $posts[$j + 1]['date_posted'];
+        $timeA = $posts[$j]['time_posted'];
+        $timeB = $posts[$j + 1]['time_posted'];
+
+        if ($dateA < $dateB) {
+            $temp = $posts[$j];
+            $posts[$j] = $posts[$j + 1];
+            $posts[$j + 1] = $temp;
+        }
+        elseif ($dateA == $dateB && $timeA < $timeB) {
+            $temp = $posts[$j];
+            $posts[$j] = $posts[$j + 1];
+            $posts[$j + 1] = $temp;
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -97,9 +128,15 @@ if (!isset($_SESSION['username'])) {
 
             <!-- Preview Section - only shows when preview is clicked -->
             <?php if (isset($_SESSION['preview'])): ?>
+
+                <div class="card aboutMeCard">
+                    <div class="cardIconWrap">
+                        <span class="cardIcon">👁️</span>
+                    </div>
+                    <span class="cardLabel">Preview</span>
+                </div>
+
                 <div class="card mainCard blogEntry">
-                    <h2>Preview</h2>
-                    <hr>
                     <p class="blogDate"><?php echo date('jS F Y, G:i'); ?> UTC</p>
                     <h2 class="blogTitle"><?php echo htmlspecialchars($_SESSION['preview']['title']); ?></h2>
                     <hr>
@@ -114,6 +151,16 @@ if (!isset($_SESSION['username'])) {
                         <a href="addEntry.php" class="submitBtn">Edit</a>
                     </div>
                 </div>
+
+                <!-- Previous entries underneath preview -->
+                <?php foreach ($posts as $post): ?>
+                    <div class="card mainCard blogEntry">
+                        <p class="blogDate"><?php echo date('jS F Y, G:i', strtotime($post['date_posted'] . ' ' . $post['time_posted'])); ?> UTC</p>
+                        <h2 class="blogTitle"><?php echo $post['title']; ?></h2>
+                        <hr>
+                        <p class="blogContent"><?php echo $post['content']; ?></p>
+                    </div>
+                <?php endforeach; ?>
             <?php endif; ?>
 
         </section>
