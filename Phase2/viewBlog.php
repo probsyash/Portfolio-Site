@@ -34,7 +34,6 @@ for ($i = 0; $i < $n - 1; $i++) {
     }
 }
 
-// Get unique months from posts for the dropdown
 $months = [];
 foreach ($posts as $post) {
     $monthKey = date('Y-m', strtotime($post['date_posted']));
@@ -44,10 +43,8 @@ foreach ($posts as $post) {
     }
 }
 
-// Check if a month filter is selected
 $selectedMonth = isset($_GET['month']) ? $_GET['month'] : 'all';
 
-// Filter posts if a month is selected
 if ($selectedMonth !== 'all') {
     $filteredPosts = [];
     foreach ($posts as $post) {
