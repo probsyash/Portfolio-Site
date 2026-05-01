@@ -36,7 +36,7 @@
     </header>
 
     <!-- Login Modal -->
-    <div id="id01" class="modal">
+    <aside id="id01" class="modal">
         <form class="modal-content animate" action="loginProcess.php" method="post">
             <div class="container">
                 <h2>Login</h2>
@@ -54,7 +54,7 @@
                 </label>
             </div>
         </form>
-    </div>
+    </aside>
 
     <!-- Background Video -->
     <div class="backgroundVideo">

@@ -101,7 +101,7 @@ if (count($posts) == 0) {
     </header>
 
     <!-- Login Modal -->
-    <div id="id01" class="modal">
+    <aside id="id01" class="modal">
         <form class="modal-content animate" action="loginProcess.php" method="post">
             <div class="container">
                 <h2>Login</h2>
@@ -119,7 +119,7 @@ if (count($posts) == 0) {
                 </label>
             </div>
         </form>
-    </div>
+    </aside>
 
     <!-- Background Video -->
     <div class="backgroundVideo">
@@ -146,9 +146,9 @@ if (count($posts) == 0) {
 
             <?php if (isset($_SESSION['username'])): ?>
                 <div class="welcomeRow">
-                    <div class="card welcomeMessage">
+                    <aside class="card welcomeMessage">
                         <p>Welcome, <?php echo $_SESSION['username']; ?>!</p>
-                    </div>
+                    </aside>
                     <div class="welcomeButtons">
                         <a href="addEntry.php" class="submitBtn">Add Post</a>
                         <a href="logout.php" class="submitBtn">Logout</a>
