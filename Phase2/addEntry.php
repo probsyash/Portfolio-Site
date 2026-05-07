@@ -1,10 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-    echo '<script>
-        alert("You must be logged in to access this page.");
-        window.location.href = "index.php";
-    </script>';
+    header("Location: index.php");
     exit();
 }
 include("connection.php");

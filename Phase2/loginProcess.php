@@ -15,10 +15,8 @@ if(isset($_POST['uname']) && isset($_POST['psw'])) {
         header("Location: addEntry.php");
         exit();
     } else {
-        echo '<script> 
-            alert("Invalid username or password");
-            window.location.href = "index.php";
-        </script>';
+        header("Location: index.php");
+        exit();
     }
 }
 ?>
