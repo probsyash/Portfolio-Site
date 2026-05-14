@@ -849,7 +849,7 @@ footer {
 
     /* Project grid */
     .projectGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 
     /* Welcome row on blog page */
@@ -907,6 +907,17 @@ footer {
     /* Timeline */
     .timeline {
         padding-left: 20px;
+    }
+
+    /* Navigation bar */
+    nav ul {
+        width: 90%;
+        flex-wrap: wrap;
+        border-radius: 1em;
+    }
+
+    nav ul li {
+        float: none;
     }
 }
 
