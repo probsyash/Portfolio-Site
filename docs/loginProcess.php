@@ -2,21 +2,33 @@
 session_start();
 include("connection.php");
 
-if(isset($_POST['uname']) && isset($_POST['psw'])) {
+if (isset($_POST['uname']) && isset($_POST['psw'])) {
     $uname = $_POST['uname'];
-    $psw = $_POST['psw'];
+    $psw   = $_POST['psw'];
 
-    $sql = "SELECT * FROM login WHERE username = '$uname' AND password = '$psw'";
-    $result = mysqli_query($conn, $sql);
-    $count = mysqli_num_rows($result);
+    // Prepared statement — prevents SQL injection
+    $stmt = $conn->prepare("SELECT password FROM login WHERE username = ?");
+    $stmt->bind_param("s", $uname);
+    $stmt->execute();
+    $stmt->store_result();
 
-    if($count == 1) {
-        $_SESSION['username'] = $uname;
-        header("Location: addEntry.php");
-        exit();
-    } else {
-        header("Location: index.php");
-        exit();
+    if ($stmt->num_rows === 1) {
+        $stmt->bind_result($hashedPassword);
+        $stmt->fetch();
+
+        // password_verify checks the plain input against the stored hash
+        if (password_verify($psw, $hashedPassword)) {
+            session_regenerate_id(true); // prevents session fixation
+            $_SESSION['username'] = $uname;
+            header("Location: addEntry.php");
+            exit();
+        }
     }
+
+    $stmt->close();
+
+    // Always redirect to index on failure — don't reveal why it failed
+    header("Location: index.php");
+    exit();
 }
 ?>
